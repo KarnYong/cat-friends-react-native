@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Header, Title, Body, Content } from 'native-base';
-import CatCard from './CatCard';
+import CardList from './CardList';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,9 +17,7 @@ export default class App extends React.Component {
           </Body>
         </Header>
         <Content>
-          <CatCard />
-          <CatCard />
-          <CatCard />
+          <CardList />
         </Content>
       </Container>
     );
