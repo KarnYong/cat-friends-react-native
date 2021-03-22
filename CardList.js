@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { CardItem, Thumbnail, Text, Left, Body } from 'native-base';
 import CatCard from './CatCard';
 
 export default class CardList extends Component {
   constructor() {
     super()
     this.state = {
-      cats: []
+      cats: [],
+      searchfield: ""
     }
   }
 
@@ -16,17 +16,28 @@ export default class CardList extends Component {
     .then(users => this.setState({cats: users}));
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.searchfield !== this.props.searchfield) {
+      console.log(this.props.searchfield)
+      this.setState({searchfield: this.props.searchfield});
+    }
+  }
+
   render() {
-    const {cats} = this.state;
+    const {cats, searchfield} = this.state;
+
+    const filteredCats = cats.filter(cat => {
+      return cat.name.toLowerCase().includes(searchfield.toLowerCase());
+    })
 
     return (
-      cats.map((user, i) => {
+      filteredCats.map((user, i) => {
         return (
           <CatCard
-            key={cats[i].id}
-            id={cats[i].id}
-            name= {cats[i].name}
-            email={cats[i].email}
+            key={filteredCats[i].id}
+            id={filteredCats[i].id}
+            name= {filteredCats[i].name}
+            email={filteredCats[i].email}
           />
         );
       })
