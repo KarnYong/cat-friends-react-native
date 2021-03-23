@@ -18,7 +18,6 @@ export default class CardList extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.searchfield !== this.props.searchfield) {
-      console.log(this.props.searchfield)
       this.setState({searchfield: this.props.searchfield});
     }
   }
